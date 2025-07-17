@@ -201,6 +201,29 @@ const AiMessageBubble: React.FC<AiMessageBubbleProps> = ({
           ? message.content
           : JSON.stringify(message.content)}
       </ReactMarkdown>
+      <div className="mt-4">
+        <h3 className="font-bold mb-2">Sources:</h3>
+        <ul className="list-disc pl-5">
+          {historicalActivity?.map((event, index) =>
+            event.title === "Web Research"
+              ? event.data
+                  .split(", ")
+                  .map((source, i) => (
+                    <li key={`${index}-${i}`}>
+                      <a
+                        href={source}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300"
+                      >
+                        {source}
+                      </a>
+                    </li>
+                  ))
+              : null
+          )}
+        </ul>
+      </div>
       <Button
         variant="default"
         className="cursor-pointer bg-neutral-700 border-neutral-600 text-neutral-300 self-end"
